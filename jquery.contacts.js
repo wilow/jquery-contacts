@@ -61,13 +61,13 @@
 		
 		_assignEvents: function() {
 			var self = this;
-			this.element.find('a.all').click(function() {	
-				self.element.find('a.filter').removeClass('selected');
+			this.element.find('.all').click(function() {	
+				self.element.find('.filter').removeClass('selected');
 				self.element.data('filter', []);
 				self._refreshContactsFilter();
 			});
 			
-			this.element.find('a.filter').click(function() {
+			this.element.find('.filter').click(function() {
 				var currentFilter = self.element.data('filter');
 				if (currentFilter === undefined || currentFilter === null) {
 					currentFilter = [];
@@ -106,12 +106,14 @@
 
         _generateFilters: function() {
             var filterDiv = $('<div>').addClass('filters');
-            var all = $('<a>').addClass('all').text(this.options.allText);
+            var all = $('<div>').addClass('all').text(this.options.allText);
             filterDiv.append(all);
+			
+			filterDiv.append($('<div>').addClass('separator'));
 
             for (var i=0;i<this.options.filterGroups.length; i++) {
                 var filterGroup = this.options.filterGroups[i];
-                var filter = $('<a>').addClass('filter').attr('data-filter', filterGroup.filter).text(filterGroup.name);
+                var filter = $('<div>').addClass('filter').attr('data-filter', filterGroup.filter).text(filterGroup.name);
                 filterDiv.append(filter);
             }            
 			this.element.append(filterDiv);
@@ -133,17 +135,20 @@
     
                 var cdiv = $('<div>').addClass('contact');
                 
+				var image = $('<img>');
+                if (contact.image) {
+					image.attr('src', contact.image);
+                } else {
+					image.addClass('noimage');
+				}
+				cdiv.append(image);
+				
                 var name = $('<span>').addClass('name').text(contact.name);
                 cdiv.append(name);
                 
                 var position = $('<span>').addClass('position').text(contact.con_position);
                 if (contact.con_position) {
                     cdiv.append(position);
-                }
-                
-                var image = $('<img>').attr('src', contact.image);
-                if (contact.image) {
-                    cdiv.append(image);
                 }
                 
                 var misc = contact.misc;
