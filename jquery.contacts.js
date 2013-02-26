@@ -102,8 +102,26 @@
 				self.element.data('filter', currentFilter);
 				self._refreshContactsFilter();
 			});
+			
+			this.element.find('.filter').hover(
+				function() {
+					var selVal = $(this).data('filter');
+					self.element.find('.contacts > .contact').each(function() { 
+						var shouldShow = false;
+						var assignedGroups = $(this).data('groups');
+						if (assignedGroups !== undefined && assignedGroups !== null) {
+							if (assignedGroups.indexOf(selVal) > -1) {								
+								$(this).addClass('filterHover'); 
+							}							
+						}
+					});
+				},
+				function() {
+					self.element.find('.contacts > .contact').removeClass('filterHover');
+				}
+			);
 		},
-
+		
         _generateFilters: function() {
             var filterDiv = $('<div>').addClass('filters');
             var all = $('<div>').addClass('all').text(this.options.allText);
