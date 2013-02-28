@@ -1,0 +1,12 @@
+{
+    "name": "jquery-contacts",
+    "title": "jQueryUI Contacts Widget",
+    "description": "generates contacts list based on retrieved json data with filtering",
+    "version": "0.1.0",
+    "author": "Seprodecon Bartosz Mosica <bmosica@gmail.com>",    
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/wilow/jquery-contacts.git"
+    }
+}
